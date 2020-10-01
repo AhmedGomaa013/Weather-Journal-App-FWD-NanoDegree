@@ -27,10 +27,21 @@ const post = async (url='',data={}) =>{
     }
 }
 
-const getAll = async ()=>{
+const getEntry = async ()=>{
     const res = await fetch('all');
     const returnRes = await res.json();
     return returnRes;
+}
+
+const updateUI = function(data={}){
+    let temp = document.querySelector('#date');
+    temp.textContent = data.date;
+
+    temp = document.querySelector('#temp');
+    temp.textContent = data.temperature;
+
+    temp = document.querySelector('#content');
+    temp.textContent = data.user_response;
 }
 
 //Events
@@ -57,14 +68,13 @@ async function ButtonPressed()
         let data = {
             'temperature':newRes.main.feels_like,
             'date':newDate,
-            'user response':text};
+            'user_response':text};
         
         const postRes = post('/entry',data);
         
-        const allEntries = await getAll();
+        const entry = await getEntry();
         
-        console.log(allEntries);
-
+        updateUI(entry);
     }
     catch
     {

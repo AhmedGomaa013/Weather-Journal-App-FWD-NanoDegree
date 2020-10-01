@@ -24,6 +24,7 @@ app.listen(port,function(){
     console.log(`Running on port:${port}`);
 });
 
+//Endpoints
 app.get('/',function(req,res){
     res.sendFile('website/index.html');
 });
@@ -34,5 +35,6 @@ app.post('/entry',function(req,res){
 });
 
 app.get('/all',function(req,res){
-    res.send(projectData);
+    let index = projectData.length -1;
+    res.send(projectData[index]);
 });
